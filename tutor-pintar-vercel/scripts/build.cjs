@@ -1,0 +1,11 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const root = path.resolve(__dirname, '..');
+const target = path.join(root, 'public', 'index.html');
+const start = '<!-- GEMINI_TUTOR_START -->', end = '<!-- GEMINI_TUTOR_END -->';
+let html = fs.readFileSync(target, 'utf8');
+const a = html.indexOf(start), b = html.indexOf(end);
+if (a < 0 || b < a) throw new Error('Blok antarmuka Gemini tidak ditemukan.');
+html = html.slice(0, a) + `${start}\n<script>\n${fs.readFileSync(path.join(root, 'src', 'gemini-client.js'), 'utf8')}\n</script>\n${end}` + html.slice(b + end.length);
+fs.writeFileSync(target, html);
+console.log('E-module dan backend siap untuk Vercel.');

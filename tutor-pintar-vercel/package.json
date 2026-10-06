@@ -1,0 +1,8 @@
+{
+  "name": "tutor-pintar-vercel",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "engines": { "node": "22.x" },
+  "scripts": { "build": "node scripts/build.cjs" }
+}
